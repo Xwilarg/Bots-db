@@ -1,6 +1,5 @@
 {
     "require": {
-        "restcord/restcord": "^0.3.0",
         "danielmewes/php-rql": "^2.3"
     }
 }
