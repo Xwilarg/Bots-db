@@ -62,9 +62,7 @@
                     }
                     if (isset($_POST['booru'])) {
                         $date = date('ym');
-                        $content = explode('|', $_POST['booru']);
-                        $arr['booru'][$date][$content[0]][0] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['booru'][$date][$content[0]][0]) + 1;
-                        $arr['booru'][$date][$content[0]][1] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['booru'][$date][$content[0]][1]) + intval($content[1]);
+                        $arr['booru'][$date][$_POST['booru']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['booru'][$date][$_POST['booru']]) + 1;
                     }
                     if (isset($_POST['games'])) {
                         $date = date('ym');
