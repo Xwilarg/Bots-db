@@ -1,6 +1,7 @@
 <?php
     require './vendor/autoload.php';
     header('Content-Type: application/json');
+    header("Access-Control-Allow-Origin: *");
     $config = json_decode(file_get_contents('config.json'), true);
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         $conn = r\connect('localhost');
