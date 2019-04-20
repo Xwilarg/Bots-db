@@ -80,6 +80,8 @@
                         $arr['bestScores'][$i]['booru'][1] = $tmpArr[5];
                         $arr['bestScores'][$i]['kancolle'][0] = $tmpArr[6];
                         $arr['bestScores'][$i]['kancolle'][1] = $tmpArr[7];
+                        $arr['bestScores'][$i]['azurlane'][0] = $tmpArr[8];
+                        $arr['bestScores'][$i]['azurlane'][1] = $tmpArr[9];
                         $i++;
                     }
                 }
