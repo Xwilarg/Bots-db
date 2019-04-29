@@ -69,13 +69,12 @@
                     }
                 }
                 if (isset($_POST['bestScores'])) { // (Sanara) Best scores
-                    $i = 0;
                     $tmpArr = explode('$', $_POST['bestScores']);
                     $arr['bestScores']['shiritori'] = explode('|', $tmpArr[0]);
                     $arr['bestScores']['anime'] = explode('|', $tmpArr[1]);
                     $arr['bestScores']['booru'] = explode('|', $tmpArr[2]);
                     $arr['bestScores']['kancolle'] = explode('|', $tmpArr[3]);
-                    $arr['bestScores']['shiritori'] = explode('|', $tmpArr[4]);
+                    $arr['bestScores']['azurlane'] = explode('|', $tmpArr[4]);
                 }
                 if (isset($_POST['errors'])) { // (Sanara) Last command answer (ok or exception)
                     $date = date('ymd');
