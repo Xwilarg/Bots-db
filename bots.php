@@ -70,20 +70,12 @@
                 }
                 if (isset($_POST['bestScores'])) { // (Sanara) Best scores
                     $i = 0;
-                    foreach (explode('$', $_POST['bestScores']) as $e1) {
-                        $tmpArr = explode('|', $e1);
-                        $arr['bestScores'][$i]['shiritori'][0] = $tmpArr[0];
-                        $arr['bestScores'][$i]['shiritori'][1] = $tmpArr[1];
-                        $arr['bestScores'][$i]['anime'][0] = $tmpArr[2];
-                        $arr['bestScores'][$i]['anime'][1] = $tmpArr[3];
-                        $arr['bestScores'][$i]['booru'][0] = $tmpArr[4];
-                        $arr['bestScores'][$i]['booru'][1] = $tmpArr[5];
-                        $arr['bestScores'][$i]['kancolle'][0] = $tmpArr[6];
-                        $arr['bestScores'][$i]['kancolle'][1] = $tmpArr[7];
-                        $arr['bestScores'][$i]['azurlane'][0] = $tmpArr[8];
-                        $arr['bestScores'][$i]['azurlane'][1] = $tmpArr[9];
-                        $i++;
-                    }
+                    $tmpArr = explode('$', $_POST['bestScores']);
+                    $arr['bestScores']['shiritori'] = explode('|', $tmpArr[0]);
+                    $arr['bestScores']['anime'] = explode('|', $tmpArr[1]);
+                    $arr['bestScores']['booru'] = explode('|', $tmpArr[2]);
+                    $arr['bestScores']['kancolle'] = explode('|', $tmpArr[3]);
+                    $arr['bestScores']['shiritori'] = explode('|', $tmpArr[4]);
                 }
                 if (isset($_POST['errors'])) { // (Sanara) Last command answer (ok or exception)
                     $date = date('ymd');
