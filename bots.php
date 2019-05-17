@@ -19,6 +19,15 @@
                     "message" => strval(json_decode(json_encode(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]), true)["serverCount"]),
                     "color" => "green"
                 )));
+            } else if ($_GET['small'] === "true") {
+                $commands = 0;
+                foreach (end(json_decode(json_encode(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]), true)["modules"]) as $key => $value){
+                    $commands += $value;
+                }
+                echo(json_encode(array(
+                    "serverCount" => json_decode(json_encode(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]), true)["serverCount"],
+                    "commandsLastMonth" => $commands
+                )));
             } else {
                 echo(json_encode(array(
                     "message" => json_decode(json_encode(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]), true)
