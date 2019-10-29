@@ -131,7 +131,6 @@
                         "url" => 'https://api.zirk.eu/' . $fileName
                     )));
                 }
-                }
                 else if (isset($_POST['delete'])) // Delete a previously uploaded file
                 {
                     if (file_exists($fileName))
