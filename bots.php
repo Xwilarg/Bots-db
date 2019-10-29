@@ -128,7 +128,7 @@
                 {
                     file_put_contents($fileName, file_get_contents($url));
                     echo(json_encode(array(
-                        "message" => 'Element uploaded'
+                        "url" => 'https://api.zirk.eu/' . $fileName
                     )));
                 }
                 }
