@@ -117,21 +117,23 @@
             {
                 function generateHash($url) {
                     $value = 0;
-                    foreach(str_split($url) as $c){
+                    foreach(str_split($url) as $c) {
                         $value += intval($c);
                     }
                     return $value;
                 }
-                $extension = end(explode('.', $url));
-                $fileName = generateHash($url) . $extension;
-                if (isset($_POST['upload'])) // Upload a file
+                $url = $_POST['url'];
+                $arr = explode('.', $url);
+                $extension = end($arr);
+                $fileName = generateHash($url) . "." . $extension;
+                if ($_POST['action'] == 'upload') // Upload a file
                 {
                     file_put_contents($fileName, file_get_contents($url));
                     echo(json_encode(array(
                         "url" => 'https://api.zirk.eu/' . $fileName
                     )));
                 }
-                else if (isset($_POST['delete'])) // Delete a previously uploaded file
+                else if ($_POST['action'] == 'delete') // Delete a previously uploaded file
                 {
                     if (file_exists($fileName))
                     {
