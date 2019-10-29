@@ -42,7 +42,7 @@
     }
     else if (hash('sha256', $_POST['token']) === $config['token'])
     {
-        if (isset($_POST['name']))
+        if (isset($_POST['name'])) // Update bot stats
         {
             $conn = r\connect('localhost');
             if (intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->count()->run($conn)) === 0) {
@@ -111,11 +111,65 @@
                 )));
             }
         }
+        else if (isset($_POST['url'])) // Upload image
+        {
+            if (isset($_POST['action']))
+            {
+                function generateHash($url) {
+                    $value = 0;
+                    foreach(str_split($url) as $c){
+                        $value += intval($c);
+                    }
+                    return $value;
+                }
+                $extension = end(explode('.', $url));
+                $fileName = generateHash($url) . $extension;
+                if (isset($_POST['upload'])) // Upload a file
+                {
+                    file_put_contents($fileName, file_get_contents($url));
+                    echo(json_encode(array(
+                        "message" => 'Element uploaded'
+                    )));
+                }
+                }
+                else if (isset($_POST['delete'])) // Delete a previously uploaded file
+                {
+                    if (file_exists($fileName))
+                    {
+                        unlink($fileName);
+                        echo(json_encode(array(
+                            "message" => 'Element deleted'
+                        )));
+                    }
+                    else
+                    {
+                        header("HTTP/1.1 400 Bad Request");
+                        echo(json_encode(array(
+                            "message" => "Invalid URL"
+                        )));
+                    }
+                }
+                else
+                {
+                    header("HTTP/1.1 400 Bad Request");
+                    echo(json_encode(array(
+                        "message" => "Action must be upload or delete"
+                    )));
+                }
+            }
+            else
+            {
+                header("HTTP/1.1 400 Bad Request");
+                echo(json_encode(array(
+                    "message" => "You must specify an action"
+                )));
+            }
+        }
         else
         {
             header("HTTP/1.1 400 Bad Request");
             echo(json_encode(array(
-                "message" => "You must specify a name"
+                "message" => "You must specify a name or an url"
             )));
         }
     }
