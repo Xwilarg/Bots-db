@@ -88,7 +88,7 @@
                     $arr['bestScores']['fatego'] = explode('|', $tmpArr[6]);
                     $arr['bestScores']['pokemon'] = explode('|', $tmpArr[7]);
                     $arr['bestScores']['girlsfrontline'] = explode('|', $tmpArr[8]);
-                    $arr['bestScores']['destinychild'] = explode('|', $tmpArr[9]);
+                    $arr['bestScores']['arknights'] = explode('|', $tmpArr[9]);
                 }
                 if (isset($_POST['errors'])) { // (Sanara) Last command answer (ok or exception)
                     $date = date('ymd');
