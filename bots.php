@@ -66,6 +66,12 @@
                     $date = date('ymdH');
                     $arr['serverModules'][$date][$_POST['modules']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['serverModules'][$date][$_POST['modules']]) + 1;
                 }
+                if (isset($_POST['commands'])) { // (Sanara) Message per commands
+                    $date = date('ym');
+                    $arr['commands'][$date][$_POST['commands']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['commands'][$date][$_POST['commands']]) + 1;
+                    $date = date('ymdH');
+                    $arr['serverCommands'][$date][$_POST['commands']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['serverCommands'][$date][$_POST['commands']]) + 1;
+                }
                 if (isset($_POST['serversBiggest'])) { // (Sanara) Most populated servers
                     $i = 0;
                     foreach (explode('$', $_POST['serversBiggest']) as $e1) {
