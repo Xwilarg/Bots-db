@@ -97,6 +97,11 @@
                     $arr['bestScores']['arknights'] = explode('|', $tmpArr[9]);
                     $arr['bestScores']['arkaudio'] = explode('|', $tmpArr[10]);
                 }
+                if (isset($_POST['gamesPlayers'])) { // (Sanara) Player count by game
+                    $date = date('ym');
+                    $val = $_POST['gamesPlayers'];
+                    $arr['gamesPlayers'][$date][$val] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['gamesPlayers'][$date][$val]) + 1;
+                }
                 if (isset($_POST['errors'])) { // (Sanara) Last command answer (ok or exception)
                     $date = date('ymd');
                     $arr['errors'][$date][$_POST['errors']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['errors'][$date][$_POST['errors']]) + 1;
