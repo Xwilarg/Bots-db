@@ -60,7 +60,7 @@
                     $date = date('ymdH');
                     $arr['nbMsgs'][$date] = intval($_POST['nbMsgs']) + intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['nbMsgs'][$date]);
                 }
-                if (isset($_POST['modules'])) { // (Sanara) Message permodules
+                /*if (isset($_POST['modules'])) { // (Sanara) Message permodules
                     $date = date('ym');
                     $arr['modules'][$date][$_POST['modules']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['modules'][$date][$_POST['modules']]) + 1;
                     $date = date('ymdH');
@@ -76,7 +76,7 @@
                         }
                         $i++;
                     }
-                }
+                }*/
                 if (isset($_POST['bestScores'])) { // (Sanara) Best scores
                     $tmpArr = explode('$', $_POST['bestScores']);
                     $arr['bestScores']['general'] = explode('|', $tmpArr[0]);
@@ -95,17 +95,17 @@
                     $date = date('ymd');
                     $arr['errors'][$date][$_POST['errors']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['errors'][$date][$_POST['errors']]) + 1;
                 }
-                if (isset($_POST['booru'])) { // (Sanara) Booru command
+                /*if (isset($_POST['booru'])) { // (Sanara) Booru command
                     $date = date('ym');
                     $arr['booru'][$date][$_POST['booru']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['booru'][$date][$_POST['booru']]) + 1;
-                }
+                }*/
                 if (isset($_POST['games'])) { // (Sanara) Game command
                     $date = date('ym');
                     $arr['games'][$date][$_POST['games']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['games'][$date][$_POST['games']]) + 1;
                 }
-                if (isset($_POST['commandServs'])) { // (Sanara) Command per server
+                if (isset($_POST['commands'])) { // (Sanara) Command per server
                     $date = date('ymdH');
-                    $arr['commandServs'][$date][$_POST['commandServs']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['commandServs'][$date][$_POST['commandServs']]) + 1;
+                    $arr['commands'][$date][$_POST['commands']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['commands'][$date][$_POST['commands']]) + 1;
                 }
                 r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->update($arr)->run($conn);
                 echo(json_encode(array(
