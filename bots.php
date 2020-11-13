@@ -20,13 +20,10 @@
                     "color" => "green"
                 )));
             } else if ($_GET['small'] === "true") {
-                $commands = 0;
-                foreach (end(json_decode(json_encode(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]), true)["modules"]) as $key => $value){
-                    $commands += $value;
-                }
+                $dateM = date('ym');
                 echo(json_encode(array(
                     "serverCount" => json_decode(json_encode(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]), true)["serverCount"],
-                    "commandsLastMonth" => $commands
+                    "commandsLastMonth" => intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]['nbMsgsM'][$dateM])
                 )));
             } else {
                 echo(json_encode(array(
@@ -59,6 +56,8 @@
                 if (isset($_POST['nbMsgs'])) { // Nb of msg sent
                     $date = date('ymdH');
                     $arr['nbMsgs'][$date] = intval($_POST['nbMsgs']) + intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['nbMsgs'][$date]);
+                    $dateM = date('ym');
+                    $arr['nbMsgsM'][$dateM] = intval($_POST['nbMsgs']) + intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['nbMsgsM'][$dateM]);
                 }
                 /*if (isset($_POST['modules'])) { // (Sanara) Message permodules
                     $date = date('ym');
