@@ -116,6 +116,8 @@
                 if (isset($_POST['commands'])) { // (Sanara) Command per server
                     $date = date('ymdH');
                     $arr['commands'][$date][$_POST['commands']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['commands'][$date][$_POST['commands']]) + 1;
+                    $date = date('ym');
+                    $arr['monthCommands'][$date][$_POST['commands']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['monthCommands'][$date][$_POST['commands']]) + 1;
                 }
                 r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->update($arr)->run($conn);
                 echo(json_encode(array(
