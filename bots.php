@@ -6,13 +6,13 @@
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         $conn = r\connect('localhost');
         if (isset($_GET['name'])) {
-            if ($_GET['online'] === "true") {
+            if (isset($_GET['online']) && $_GET['online'] === "true") {
                 if ((new DateTime())->getTimestamp() - (DateTime::createFromFormat("Y-m-d H:i:s", json_decode(json_encode(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]), true)["date"]))->getTimestamp() < 120) {
                     header("HTTP/1.1 204 No Content");
                 } else {
                     header("HTTP/1.1 503 Service Unavailable");
                 }
-            } else if ($_GET['shield'] === "true") {
+            } else if (isset($_GET['shield']) && $_GET['shield'] === "true") {
                 echo(json_encode(array(
                     "schemaVersion" => 1,
                     "label" => "Server count",
