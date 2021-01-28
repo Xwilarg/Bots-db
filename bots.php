@@ -19,7 +19,7 @@
                     "message" => strval(json_decode(json_encode(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]), true)["serverCount"]),
                     "color" => "green"
                 )));
-            } else if ($_GET['small'] === "true") {
+            } else if (isset($_GET['small']) && $_GET['small'] === "true") {
                 $dateM = date('ym');
                 echo(json_encode(array(
                     "serverCount" => json_decode(json_encode(r\db('zirk_bots')->table('ping')->filter(array('name' => $_GET['name']))->run($conn)->ToArray()[0]), true)["serverCount"],
