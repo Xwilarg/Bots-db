@@ -55,33 +55,11 @@
                 }
                 if (isset($_POST['nbMsgs'])) { // Nb of msg sent
                     $date = date('ymdH');
-                    $arr['nbMsgs'][$date] = intval($_POST['nbMsgs']) + intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['nbMsgs'][$date]);
+                    $arr['nbMsgs'][$date][$_POST['nbMsgs']] = 1 + intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['nbMsgs'][$date]);
                     $dateM = date('ym');
-                    $arr['nbMsgsM'][$dateM] = intval($_POST['nbMsgs']) + intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['nbMsgsM'][$dateM]);
+                    $arr['nbMsgsM'][$dateM]$_POST['nbMsgs'] = 1 + intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['nbMsgsM'][$dateM]);
                 }
-                /*if (isset($_POST['modules'])) { // (Sanara) Message permodules
-                    $date = date('ym');
-                    $arr['modules'][$date][$_POST['modules']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['modules'][$date][$_POST['modules']]) + 1;
-                    $date = date('ymdH');
-                    $arr['serverModules'][$date][$_POST['modules']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['serverModules'][$date][$_POST['modules']]) + 1;
-                }
-                if (isset($_POST['commands'])) { // (Sanara) Message per commands
-                    $date = date('ym');
-                    $arr['commands'][$date][$_POST['commands']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['commands'][$date][$_POST['commands']]) + 1;
-                    $date = date('ymdH');
-                    $arr['serverCommands'][$date][$_POST['commands']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['serverCommands'][$date][$_POST['commands']]) + 1;
-                }
-                if (isset($_POST['serversBiggest'])) { // (Sanara) Most populated servers
-                    $i = 0;
-                    foreach (explode('$', $_POST['serversBiggest']) as $e1) {
-                        $y = 0;
-                        foreach (explode('|', $e1) as $e2) {
-                            $arr['serversBiggest'][$i][$y] = $e2;
-                            $y++;
-                        }
-                        $i++;
-                    }
-                }*/
+                /*
                 if (isset($_POST['bestScores'])) { // (Sanara) Best scores
                     $tmpArr = explode('$', $_POST['bestScores']);
                     $arr['bestScores']['general'] = explode('|', $tmpArr[0]);
@@ -95,7 +73,7 @@
                     $arr['bestScores']['girlsfrontline'] = explode('|', $tmpArr[8]);
                     $arr['bestScores']['arknights'] = explode('|', $tmpArr[9]);
                     $arr['bestScores']['arkaudio'] = explode('|', $tmpArr[10]);
-                }
+                }*/
                 if (isset($_POST['gamesPlayers'])) { // (Sanara) Player count by game
                     $date = date('ym');
                     $val = $_POST['gamesPlayers'];
@@ -105,10 +83,10 @@
                     $date = date('ymd');
                     $arr['errors'][$date][$_POST['errors']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['errors'][$date][$_POST['errors']]) + 1;
                 }
-                /*if (isset($_POST['booru'])) { // (Sanara) Booru command
+                if (isset($_POST['booru'])) { // (Sanara) Booru command
                     $date = date('ym');
                     $arr['booru'][$date][$_POST['booru']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['booru'][$date][$_POST['booru']]) + 1;
-                }*/
+                }
                 if (isset($_POST['games'])) { // (Sanara) Game command
                     $date = date('ym');
                     $arr['games'][$date][$_POST['games']] = intval(r\db('zirk_bots')->table('ping')->filter(array('name' => $_POST['name']))->run($conn)->ToArray()[0]['games'][$date][$_POST['games']]) + 1;
